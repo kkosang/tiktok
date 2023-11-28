@@ -8,13 +8,13 @@ import 'package:tiktok/features/authentication/widgets/auth_button.dart';
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
-  void onSignUpTab(BuildContext context) {
+  void _onSignUpTab(BuildContext context) {
     Navigator.of(context).pop();
   }
 
-  void onEmailLoginTap(BuildContext context) {
+  void _onEmailLoginTap(BuildContext context) {
     Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => const EmailScreen()));
+        .push(MaterialPageRoute(builder: (context) => const UsernameScreen()));
   }
 
   @override
@@ -43,12 +43,12 @@ class LoginScreen extends StatelessWidget {
             ),
             Gaps.v40,
             AuthButton(
-                onTapFunc: onEmailLoginTap,
+                onTapFunc: _onEmailLoginTap,
                 icon: const FaIcon(FontAwesomeIcons.user),
                 text: "Use email & password"),
             Gaps.v14,
             AuthButton(
-                onTapFunc: onEmailLoginTap,
+                onTapFunc: _onEmailLoginTap,
                 icon: const FaIcon(FontAwesomeIcons.apple),
                 text: "Continue with Apple"),
           ]),
@@ -65,7 +65,7 @@ class LoginScreen extends StatelessWidget {
               const Text("Don't have an account?"),
               Gaps.h5,
               GestureDetector(
-                onTap: () => onSignUpTab(context),
+                onTap: () => _onSignUpTab(context),
                 child: Text(
                   'Sign up',
                   style: TextStyle(
