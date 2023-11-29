@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:tiktok/constants/gaps.dart';
 import 'package:tiktok/constants/sizes.dart';
+import 'package:tiktok/features/authentication/widgets/form_button.dart';
 
-class UsernameScreen extends StatefulWidget {
-  const UsernameScreen({super.key});
+class EmailScreen extends StatefulWidget {
+  const EmailScreen({super.key});
 
   @override
-  State<UsernameScreen> createState() => _UsernameScreenState();
+  State<EmailScreen> createState() => _EmailScreenState();
 }
 
-class _UsernameScreenState extends State<UsernameScreen> {
+class _EmailScreenState extends State<EmailScreen> {
   final TextEditingController _usernameController = TextEditingController();
 
   String _username = "";
@@ -27,6 +28,12 @@ class _UsernameScreenState extends State<UsernameScreen> {
   }
 
   @override
+  void dispose() {
+    _usernameController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -39,20 +46,13 @@ class _UsernameScreenState extends State<UsernameScreen> {
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Gaps.v40,
           const Text(
-            'Create username',
+            'What is your email?',
             style: TextStyle(
               fontSize: Sizes.size24,
               fontWeight: FontWeight.w700,
             ),
           ),
           Gaps.v8,
-          const Text(
-            'You can always change this later.',
-            style: TextStyle(
-              fontSize: Sizes.size16,
-              color: Colors.black54,
-            ),
-          ),
           Gaps.v16,
           TextField(
             controller: _usernameController,
@@ -72,24 +72,7 @@ class _UsernameScreenState extends State<UsernameScreen> {
             cursorColor: Theme.of(context).primaryColor,
           ),
           Gaps.v20,
-          FractionallySizedBox(
-            widthFactor: 1,
-            child: AnimatedContainer(
-              padding: const EdgeInsets.symmetric(vertical: Sizes.size16),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(Sizes.size10),
-                  color: _username.isEmpty
-                      ? Colors.grey.shade400
-                      : Theme.of(context).primaryColor),
-              duration: const Duration(milliseconds: 200),
-              child: const Text(
-                'Next',
-                textAlign: TextAlign.center,
-                style:
-                    TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
-              ),
-            ),
-          )
+          FormButton(disabled: _username.isEmpty)
         ]),
       ),
     );
